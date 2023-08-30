@@ -13,14 +13,18 @@ class PhoneLoginScreen extends StatefulWidget {
 }
 
 class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
+  // --------------- state ----------------
+
   TextEditingController _controller = TextEditingController();
   bool showPrefixIcon = false;
+  // --------------- methods ----------------
 
   void _onPhoneNumberChange(String value) {
     setState(() {
       showPrefixIcon = value.replaceAll(' ', '').length == 10;
     });
   }
+  // --------------- UI ----------------
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,6 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
         child: Padding(
           padding: const EdgeInsets.only(left: 24, right: 24),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
@@ -75,12 +78,14 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                             keyboardType: TextInputType.number,
                             style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal, color: Colors.grey[700]),
                             decoration: InputDecoration(
+                              labelText: 'تلفن همراه',
+                              labelStyle: const TextStyle(fontSize: 13),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(color: Colors.black12),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Colors.black12),
+                                borderSide: const BorderSide(color: Colors.purple),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -99,7 +104,23 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: () => Navigator.of(context).pushNamed(OtpScreen.routeName),
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  PageRouteBuilder(
+                                    transitionDuration: const Duration(milliseconds: 500), // Set animation duration
+                                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                      return SlideTransition(
+                                        position: Tween<Offset>(
+                                          begin: const Offset(1.0, 0.0), // Set starting position
+                                          end: Offset.zero, // Set ending position
+                                        ).animate(animation),
+                                        child: child,
+                                      );
+                                    },
+                                    pageBuilder: (context, animation, secondaryAnimation) => const OtpScreen(), // Replace with your screen
+                                  ),
+                                );
+                              },
                               style: ButtonStyle(
                                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                                 backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
@@ -121,8 +142,6 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                   ],
                 ),
               ),
-
-              // const SizedBox(height: 38),
             ],
           ),
         ),

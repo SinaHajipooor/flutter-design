@@ -112,7 +112,7 @@ class _OtpScreenState extends State<OtpScreen> {
                               onSubmit: (pin) => print(pin),
                             ),
                           ),
-                          const SizedBox(height: 22),
+                          const SizedBox(height: 38),
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
