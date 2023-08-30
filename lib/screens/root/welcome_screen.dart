@@ -18,10 +18,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         child: Padding(
           padding: const EdgeInsets.only(left: 24, right: 24),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Column(
                 children: [
+                  const Text(
+                    'خوش آمدید',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'سامانه جامع مدیریت مراکز حجی فلاتر',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black38),
+                  ),
+                  const SizedBox(height: 50),
                   Image.asset(
                     'assets/images/auth.png',
                     width: 240,
@@ -32,16 +42,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 margin: const EdgeInsets.only(bottom: 30, top: 20),
                 child: Column(
                   children: [
-                    const Text(
-                      'خوش آمدید',
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'سامانه جامع مدیریت مراکز حجی فلاتر',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black38),
-                    ),
-                    const SizedBox(height: 50),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -84,8 +84,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ],
                 ),
               ),
-
-              // const SizedBox(height: 38),
             ],
           ),
         ),
