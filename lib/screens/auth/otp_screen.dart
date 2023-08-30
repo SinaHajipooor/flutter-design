@@ -1,5 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:testui/widgets/auth/text_feild_otp.dart';
+import 'package:pin_input_text_field/pin_input_text_field.dart';
 
 class OtpScreen extends StatefulWidget {
   static const routeName = '/otp-screen';
@@ -10,8 +12,52 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  // --------------- state ----------------
+  final TextEditingController pinEditingController = TextEditingController();
+  Timer? _timer;
+  int _startSeconds = 90;
+  int _elapsedSeconds = 0;
+  // --------------- lifecycle ----------------
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer!.cancel();
+    super.dispose();
+  }
+
+  // --------------- methods ----------------
+  void startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      setState(() {
+        if (_startSeconds <= 0) {
+          _timer!.cancel();
+        } else {
+          _startSeconds = _startSeconds - 1;
+          _elapsedSeconds = _elapsedSeconds + 1;
+        }
+      });
+    });
+  }
+  // --------------- UI ----------------
+
   @override
   Widget build(BuildContext context) {
+    final remainingDuration = Duration(seconds: _startSeconds);
+    final remaining = '${remainingDuration.inMinutes.remainder(60).toString().padLeft(2, '0')}:${remainingDuration.inSeconds.remainder(60).toString().padLeft(2, '0')}';
+    final PinDecoration pinDecoration = BoxLooseDecoration(
+      strokeColorBuilder: PinListenColorBuilder(Colors.grey.shade600.withOpacity(0.2), Colors.grey.shade300),
+      radius: const Radius.circular(10),
+      textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black),
+      obscureStyle: ObscureStyle(
+        isTextObscure: false,
+        obscureText: '●',
+      ),
+    );
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xfff7f6fb),
@@ -48,23 +94,23 @@ class _OtpScreenState extends State<OtpScreen> {
                     const Text(
                       'ما یک پیامک حاوی کد تایید برای شماره 091555613393 ارسال کردیم. کد را وارد کنید',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black38),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.black38),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 30),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              textFeildOtp(context: context, first: true, last: false),
-                              textFeildOtp(context: context, first: false, last: false),
-                              textFeildOtp(context: context, first: false, last: false),
-                              textFeildOtp(context: context, first: false, last: false),
-                              textFeildOtp(context: context, first: false, last: true),
-                            ],
+                          Center(
+                            child: PinInputTextField(
+                              controller: pinEditingController,
+                              decoration: pinDecoration,
+                              pinLength: 5,
+                              autoFocus: false,
+                              textInputAction: TextInputAction.done,
+                              onSubmit: (pin) => print(pin),
+                            ),
                           ),
                           const SizedBox(height: 22),
                           SizedBox(
@@ -93,15 +139,20 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
               ),
               const SizedBox(height: 18),
-              const Text(
-                'پیامکی دریافت نکردید ؟',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black38),
-              ),
-              const SizedBox(height: 18),
-              const Text(
-                'دوباره ارسال کن',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.purple),
-              )
+              remaining == '00:00'
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('پیامک را دریافت نکردید ؟', style: TextStyle(fontSize: 14)),
+                        TextButton(onPressed: () {}, child: const Text('دوباره ارسال کن', style: TextStyle(fontSize: 11, color: Colors.purple))),
+                      ],
+                    )
+                  : Center(
+                      child: Text(
+                        'زمان باقی مانده : $remaining',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    ),
             ],
           ),
         ),
