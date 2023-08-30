@@ -59,7 +59,7 @@ class _OtpScreenState extends State<OtpScreen> {
       ),
     );
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: const Color(0xfff7f6fb),
       body: SafeArea(
         child: Padding(
