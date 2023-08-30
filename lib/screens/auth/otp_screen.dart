@@ -92,8 +92,16 @@ class _OtpScreenState extends State<OtpScreen> {
                   ],
                 ),
               ),
-
-              // const SizedBox(height: 38),
+              const SizedBox(height: 18),
+              const Text(
+                'پیامکی دریافت نکردید ؟',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black38),
+              ),
+              const SizedBox(height: 18),
+              const Text(
+                'دوباره ارسال کن',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.purple),
+              )
             ],
           ),
         ),
