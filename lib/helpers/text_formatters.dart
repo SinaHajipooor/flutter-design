@@ -27,7 +27,7 @@ class PhoneFormatter extends TextInputFormatter {
     final StringBuffer formattedText = StringBuffer();
 
     for (int i = 0; i < strippedText.length; i++) {
-      if (i > 0 && i % 3 == 0) {
+      if (i == 3 || i == 6) {
         formattedText.write(' ');
       }
       formattedText.write(strippedText[i]);

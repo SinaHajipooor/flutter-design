@@ -12,6 +12,15 @@ class PhoneLoginScreen extends StatefulWidget {
 }
 
 class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
+  TextEditingController _controller = TextEditingController();
+  bool showPrefixIcon = false;
+
+  void _onPhoneNumberChange(String value) {
+    setState(() {
+      showPrefixIcon = value.replaceAll(' ', '').length == 10;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,16 +61,18 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black38),
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 20),
                     Container(
-                      padding: const EdgeInsets.all(28),
+                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                       child: Column(
                         children: [
                           TextFormField(
                             textDirection: TextDirection.ltr,
+                            onChanged: _onPhoneNumberChange,
+                            controller: _controller,
                             keyboardType: TextInputType.number,
-                            style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold, color: Colors.grey[700]),
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal, color: Colors.grey[700]),
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(color: Colors.black12),
@@ -71,11 +82,12 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                                 borderSide: const BorderSide(color: Colors.black12),
                                 borderRadius: BorderRadius.circular(10),
                               ),
+                              contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                               suffix: const Padding(
                                 padding: EdgeInsets.only(left: 8, right: 10),
-                                child: Text('+98', style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
+                                child: Text('+98', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                               ),
-                              prefixIcon: const Icon(Icons.check_circle, color: Colors.green, size: 28),
+                              prefixIcon: showPrefixIcon ? const Icon(Icons.check_circle, color: Colors.green, size: 28) : null,
                             ),
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
