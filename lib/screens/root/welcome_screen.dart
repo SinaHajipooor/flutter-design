@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testui/services/imports/app_imports.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -64,7 +65,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.of(context).pushNamed(PhoneLoginScreen.routeName),
                         style: ButtonStyle(
                           foregroundColor: MaterialStateProperty.all<Color>(Colors.purple),
                           backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -76,7 +77,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         child: const Padding(
                           padding: EdgeInsets.all(14),
-                          child: Text('ورود با شماره‌موبایل', style: TextStyle(fontSize: 13)),
+                          child: Text('ورود با تلفن همراه', style: TextStyle(fontSize: 13)),
                         ),
                       ),
                     ),
