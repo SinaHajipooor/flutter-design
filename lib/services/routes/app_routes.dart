@@ -5,5 +5,5 @@ import '../imports/app_imports.dart';
 final Map<String, WidgetBuilder> appRoutes = {
   UserPassLoginScreen.routeName: (ctx) => const UserPassLoginScreen(),
   PhoneLoginScreen.routeName: (ctx) => const PhoneLoginScreen(),
-  OtpScreen.souteName: (ctx) => const OtpScreen(),
+  OtpScreen.routeName: (ctx) => const OtpScreen(),
 };

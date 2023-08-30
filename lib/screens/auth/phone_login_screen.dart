@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:testui/screens/auth/otp_screen.dart';
 
 import '../../helpers/text_formatters.dart';
 
@@ -98,7 +99,7 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => Navigator.of(context).pushNamed(OtpScreen.routeName),
                               style: ButtonStyle(
                                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                                 backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
