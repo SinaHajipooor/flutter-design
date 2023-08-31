@@ -6,4 +6,5 @@ final Map<String, WidgetBuilder> appRoutes = {
   UserPassLoginScreen.routeName: (ctx) => const UserPassLoginScreen(),
   PhoneLoginScreen.routeName: (ctx) => const PhoneLoginScreen(),
   OtpScreen.routeName: (ctx) => const OtpScreen(),
+  HomeScreen.routeName: (ctx) => const HomeScreen(),
 };
