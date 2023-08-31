@@ -65,7 +65,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.of(context).pushNamed(PhoneLoginScreen.routeName),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            PageRouteBuilder(
+                              transitionDuration: const Duration(milliseconds: 500),
+                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                return FadeTransition(
+                                  opacity: animation,
+                                  child: child,
+                                );
+                              },
+                              pageBuilder: (context, animation, secondaryAnimation) => const PhoneLoginScreen(),
+                            ),
+                          );
+                        },
                         style: ButtonStyle(
                           foregroundColor: MaterialStateProperty.all<Color>(Colors.purple),
                           backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
