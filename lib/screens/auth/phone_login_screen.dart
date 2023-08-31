@@ -24,8 +24,8 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
       showPrefixIcon = value.replaceAll(' ', '').length == 10;
     });
   }
-  // --------------- UI ----------------
 
+  // --------------- UI ----------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(

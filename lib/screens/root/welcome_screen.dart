@@ -29,7 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   const SizedBox(height: 10),
                   const Text(
                     'سامانه جامع مدیریت مراکز حجی فلاتر',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black38),
+                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: 14, color: Colors.black38),
                   ),
                   const SizedBox(height: 50),
                   Image.asset(
