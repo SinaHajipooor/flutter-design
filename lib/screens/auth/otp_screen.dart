@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
+import 'package:testui/screens/root/home_screen.dart';
 
 class OtpScreen extends StatefulWidget {
   static const routeName = '/otp-screen';
@@ -117,7 +118,7 @@ class _OtpScreenState extends State<OtpScreen> {
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: () => Navigator.of(context).pushNamed(OtpScreen.routeName),
+                                onPressed: () => Navigator.of(context).pushNamed(HomeScreen.routeName),
                                 style: ButtonStyle(
                                   foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),

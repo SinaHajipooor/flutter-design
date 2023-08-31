@@ -12,13 +12,28 @@ class _BottomTabsState extends State<BottomTabs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: GNav(
-        tabs: const [
-          GButton(icon: Icons.home, text: 'لیست محصولات'),
-          GButton(icon: Icons.person, text: 'پروفایل'),
-          GButton(icon: Icons.favorite_border, text: 'علاقه‌مندی‌ها'),
-          GButton(icon: Icons.production_quantity_limits, text: 'محصولات ویژه'),
-        ],
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: GNav(
+            backgroundColor: Colors.white,
+            activeColor: Colors.purple,
+            tabBackgroundColor: Colors.purple[100]!,
+            padding: const EdgeInsets.all(15),
+            onTabChange: (index) {},
+            gap: 2,
+            tabs: const [
+              GButton(
+                icon: Icons.person,
+                text: 'پروفایل',
+              ),
+              GButton(icon: Icons.home, text: 'محصولات'),
+              GButton(icon: Icons.favorite_border, text: 'علاقه‌مندی‌ها'),
+              GButton(icon: Icons.production_quantity_limits, text: 'سبد خرید'),
+            ],
+          ),
+        ),
       ),
     );
   }
